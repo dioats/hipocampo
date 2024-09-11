@@ -4,11 +4,11 @@ const handlebars = require("express-handlebars");
 const path = require("path");
 const app = express();
 
-// const connection = require('./db/db.js');
+const connection = require('./db/db.js');
 
 app.use(express.static("public"));
 app.set("view engine", "handlebars");
-app.engine("handlebars", handlebars.engine({}));
+app.engine("handlebars", handlebars.engine());
 
 app.get('/', function (req, res) {
   res.render("home", {layout: false});
