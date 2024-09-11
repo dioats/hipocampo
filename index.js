@@ -1,31 +1,25 @@
+require("dotenv").config();
 const express = require("express");
 const handlebars = require("express-handlebars");
 const path = require("path");
-
 const app = express();
 
-// Conexão com banco de dados MySql
-const conn = require('./db/conn')
+// const connection = require('./db/db.js');
 
 app.use(express.static("public"));
 app.set("view engine", "handlebars");
+app.engine("handlebars", handlebars.engine({}));
 
-// Template Engine
-app.engine("handlebars", handlebars.engine({
-  layoutsDir: path.join(__dirname, "views", "layouts")
-}))
-
-//Rotas
-app.get('/home', function (req, res){
-  res.send('home');
+app.get('/', function (req, res) {
+  res.render("home", {layout: false});
 });
 
 app.get('/register', function (req, res){
-  res.send('register');
+  res.render("register", {layout: false});
 });
 
 app.get('/login', function (req, res){
-  res.send('login');
+  res.render("login", {layout: false});
 });
 
 const PORT = process.env.PORT || 3000;
