@@ -7,19 +7,20 @@ const app = express();
 const connection = require('./db/db.js');
 
 app.use(express.static("public"));
-app.set("view engine", "handlebars");
 app.engine("handlebars", handlebars.engine());
+app.set("view engine", "handlebars");
+app.set('views', path.resolve(__dirname, "./views"));
 
 app.get('/', function (req, res) {
-  res.render("home", {layout: false});
+  res.render("home");
 });
 
 app.get('/register', function (req, res){
-  res.render("register", {layout: false});
+  res.render("register");
 });
 
 app.get('/login', function (req, res){
-  res.render("login", {layout: false});
+  res.render("login");
 });
 
 const PORT = process.env.PORT || 3000;
