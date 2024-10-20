@@ -1,0 +1,42 @@
+body {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+}
+
+.arrow-back-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.logo {
+  width: 150px;
+  height: 168px;
+  align-self: center;
+}
+
+.space {
+  display: block;
+  height: 10px;
+}
+
+.input {
+  padding: 16px;
+  background-color: #D9D9D9;
+  border: none;
+  border-radius: 8px;
+  margin-top: 8px;
+}
+
+.button {
+  background-color: #61B8CC;
+  text-align: center;
+  text-decoration: none;
+  color: whitesmoke;
+  font-weight: bold;
+  display: block;
+  padding: 14px;
+  border-radius: 8px;
+  margin: 8px;
+  border: none;
+  display: block;
+}

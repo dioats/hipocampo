@@ -1,23 +1,29 @@
-<link rel="stylesheet" type="text/css" href="/css/login.css" />
-
-<div class="main-login">
-  <div class="left-login">
-    <h1>faça seu cadrastro <br> e entre para o nosso site &#x1f917;</h1>
-    <img src="/assets/anima.svg" class="left-login-img" alt="as">
+<main>
+  <div id="go-back">
+    <a href="/">
+      <img src="/assets/arrow-back-icon.png" alt="arrow back icon" class="arrow-back-icon">
+    </a>
   </div>
-  <div class="right-login">
-    <div class="card-login">
-      <h1>LOGIN</h1>
-      <div class="textfield">
-        <label for="usuario">usuario</label>
-        <input type="text" name="usuario" placeholder="usuario">
 
-      </div>
-      <div class="textfield">
-        <label for="senha">senha</label>
-        <input type="password" name="senha" placeholder="senha ">
-      </div>
-      <button class="btn-login">login</button>
+  <div id="logo">
+    <img src="/assets/hipocampo-logo.png" alt="hipocampo logo" class="logo">
+    <div class="purpose">Te ajudaremos a se lembrar do que é mais importante</div>
+  </div>
+
+  <form action="/login" method="post">
+    <div class="field">
+      <label for="email">EMAIL: </label>
+      <input type="email" name="email" id="email" class="input" required>
     </div>
+    <div class="field">
+      <label for="password">SENHA: </label>
+      <input type="password" name="password" id="password" class="input" required>
+    </div>
+    <input type="submit" value="ENTRAR" class="button">
+  </form>
+
+  <div class="access-option">
+    <div>Primeira vez por aqui?</div>
+    <a href="/register">Criar conta</a>
   </div>
-</div>
+</main>

@@ -1,0 +1,62 @@
+div#go-back {
+  padding: 8px;
+}
+
+div#logo {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+div#logo div {
+  width: 60%;
+  text-align: center;
+}
+
+form {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+form .field {
+  margin-top: 20px;
+  padding: 0 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+form input[type=submit] {
+  margin-top: 40px;
+}
+
+.access-option {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
+.access-option div {
+  text-align: center;
+}
+
+.access-option a {
+  color: #61B8CC;
+}
+
+@media (min-width: 600px) {
+  main {
+    margin: 0 auto;
+    width: 30%;
+  }
+  div#go-back {
+    display: none;
+  }
+
+  div#logo {
+    margin-top: 10px;
+  }
+}
