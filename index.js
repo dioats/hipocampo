@@ -5,6 +5,7 @@ const path = require("path");
 const app = express();
 
 const connection = require('./db/db.js');
+const User = require("./models/User.js");
 
 app.use(express.static("public"));
 app.engine("handlebars", handlebars.engine());
@@ -27,9 +28,22 @@ app.get('/register', function (req, res) {
   res.render("register", {css: ["access.css"]});
 });
 
-app.post('/register', function (req, res) {
-  console.log(req.body)
-  res.render("register", {css: ["access.css"]});
+app.post('/register', async function (req, res, next) {
+  
+  try {
+
+    const newUser = await User.create({
+      username: req.body['username'],
+      email: req.body['email'],
+      password: req.body['password'],
+      phoneNumber: req.body['phoneNumber'],
+    });
+  
+    res.render("register", {css: ["access.css"]});
+  } catch(e) {
+    next(e);
+  }
+
 });
 
 app.get('/login', function (req, res) {
@@ -46,6 +60,10 @@ app.get('/note/new', function (req, res) {
 
 app.get('/note/:id', function (req, res) {
   res.render("note");
+});
+
+app.use(async function(err, req, res, next) {
+  res.render("error");
 });
 
 const PORT = process.env.PORT || 3000;
