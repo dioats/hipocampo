@@ -41,3 +41,10 @@ body {
   display: block;
   cursor: pointer;
 }
+
+.error-banner {
+  background-color: #B00020;
+  color: white;
+  padding: 16px;
+  border-radius: 8px;
+}

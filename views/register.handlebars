@@ -27,6 +27,13 @@
       <label for="password">SENHA: </label>
       <input type="password" name="password" id="password" class="input" required>
     </div>
+
+    {{#if errorMessage}}
+      <div class="error-banner">
+        {{errorMessage}}
+      </div>
+    {{/if}}
+
     <input type="submit" value="REGISTRAR-SE" class="button">
   </form>
 

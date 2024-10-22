@@ -47,6 +47,11 @@ form input[type=submit] {
   color: #61B8CC;
 }
 
+.error-banner {
+  padding: 16px;
+  margin: 12px 12px 0 12px;
+}
+
 @media (min-width: 600px) {
   main {
     margin: 0 auto;

@@ -31,7 +31,6 @@ app.get('/register', function (req, res) {
 app.post('/register', async function (req, res, next) {
   
   try {
-
     const newUser = await User.create({
       username: req.body['username'],
       email: req.body['email'],
@@ -39,8 +38,12 @@ app.post('/register', async function (req, res, next) {
       phoneNumber: req.body['phoneNumber'],
     });
   
-    res.render("register", {css: ["access.css"]});
+    res.redirect("/");
   } catch(e) {
+    if(e.errors && e.errors[0] && e.errors[0].type === "unique violation") {
+      res.render("register", {css: ["access.css"], errorMessage: "Email já cadastrado!"});
+      return;
+    }
     next(e);
   }
 
