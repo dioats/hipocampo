@@ -3,24 +3,46 @@ const express = require("express");
 const handlebars = require("express-handlebars");
 const path = require("path");
 const app = express();
-
-const connection = require('./db/db.js');
+const session = require('express-session');
 const User = require("./models/User.js");
 
 app.use(express.static("public"));
 app.engine("handlebars", handlebars.engine());
 app.set("view engine", "handlebars");
 app.set('views', path.resolve(__dirname, "./views"));
-app.use(express.urlencoded())
+app.use(express.urlencoded());
+app.use(session({
+  secret: 'mySecretKey',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}));
+
+function isLogged(req) {
+  if(process.env.MODE === "dev") {
+    req.session.user = {
+      email: process.env.DEV_MODE_USER
+    }
+  }
+
+  return !!req.session.user;
+}
+
+function authMiddleware(req, res, next) {
+
+  if (isLogged(req)) {
+    next();
+  } else {
+    res.redirect('/login');
+  }
+}
 
 app.get('/', function (req, res) {
 
-  const isLogged = false;
-
-  if(isLogged) {
+  if(isLogged(req)) {
     return res.render("home");
   }
-  
+
   return res.render("main", {css: ["main.css"]});
 });
 
@@ -31,12 +53,18 @@ app.get('/register', function (req, res) {
 app.post('/register', async function (req, res, next) {
   
   try {
-    const newUser = await User.create({
+    await User.create({
       username: req.body['username'],
       email: req.body['email'],
       password: req.body['password'],
       phoneNumber: req.body['phoneNumber'],
     });
+
+    console.log(`usuario criado: ${req.body['email']}`);
+
+    req.session.user = {
+      email: req.body['email']
+    }
   
     res.redirect("/");
   } catch(e) {
@@ -44,6 +72,7 @@ app.post('/register', async function (req, res, next) {
       res.render("register", {css: ["access.css"], errorMessage: "Email já cadastrado!"});
       return;
     }
+    console.log(`erro ao cadastrar usuario: ${req.body['email']}`, JSON.stringify(error))
     next(e);
   }
 
@@ -53,15 +82,35 @@ app.get('/login', function (req, res) {
   res.render("login", {css: ["access.css"]});
 });
 
-app.get('/profile', function (req, res) {
+app.post('/login', async function (req, res) {
+
+  const user = await User.findOne({
+    where: {
+      email: req.body['email'],
+    }
+  });
+
+  if(!user || user.password != req.body['password']) {
+    res.render("login", {css: ["access.css"], errorMessage: "Login inválido!"});
+    return;
+  }
+
+  req.session.user = {
+    email: req.body['email']
+  }
+
+  res.redirect("/");
+});
+
+app.get('/profile', authMiddleware, function (req, res) {
   res.render("profile");
 });
 
-app.get('/note/new', function (req, res) {
+app.get('/note/new', authMiddleware, function (req, res) {
   res.render("note");
 });
 
-app.get('/note/:id', function (req, res) {
+app.get('/note/:id', authMiddleware, function (req, res) {
   res.render("note");
 });
 
