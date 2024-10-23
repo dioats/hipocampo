@@ -1,1 +1,41 @@
-<h1>HOME</h1>
+<div id="icons">
+  <div class="icon">
+    <a href="/profile">
+      <img src="/assets/user-icon.png" alt="user icon" class="user-icon">
+    </a>
+  </div>
+  <div class="icon">
+    <a href="/logout">
+      <img src="/assets/logout-icon.png" alt="logout icon" class="logout-icon">
+    </a>
+  </div>
+</div>
+
+<div id="hello-user">
+  Olá, {{user.username}}
+</div>
+
+<div id="reminders-box">
+  <div id="title">
+    <div>Seus lembretes</div>
+    <a href="/reminders/new">
+      <img src="/assets/plus-icon.png" alt="plus icon" class="plus-icon">
+    </a>
+  </div>
+
+  <div id="reminders">
+    {{#each lembretes}}
+      <a href="/reminders/{{this.id}}" class="reminder no-link">
+        <div class="reminder-title">
+          {{this.nome}}
+        </div>
+        <div class="reminder-date-text">
+          Acontecerá daqui 300 dias
+        </div>
+        <div class="reminder-date">
+          {{data_evento}}
+        </div>
+      </a>
+    {{/each}}
+  </div>
+</div>

@@ -1,5 +1,5 @@
 div#go-back {
-  padding: 8px;
+  padding: 20px;
 }
 
 div#logo {
@@ -22,12 +22,13 @@ form {
 
 form .field {
   margin-top: 20px;
-  padding: 0 12px;
+  padding: 0 20px;
   display: flex;
   flex-direction: column;
 }
 
 form input[type=submit] {
+  margin: 20px;
   margin-top: 40px;
 }
 
@@ -49,7 +50,7 @@ form input[type=submit] {
 
 .error-banner {
   padding: 16px;
-  margin: 12px 12px 0 12px;
+  margin: 20px 20px 0 20px;
 }
 
 @media (min-width: 600px) {

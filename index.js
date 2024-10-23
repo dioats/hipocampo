@@ -5,6 +5,7 @@ const path = require("path");
 const app = express();
 const session = require('express-session');
 const User = require("./models/User.js");
+const Lembrete = require("./models/Lembrete.js");
 
 app.use(express.static("public"));
 app.engine("handlebars", handlebars.engine());
@@ -37,13 +38,35 @@ function authMiddleware(req, res, next) {
   }
 }
 
-app.get('/', function (req, res) {
+app.get('/', async function (req, res) {
 
-  if(isLogged(req)) {
-    return res.render("home");
+  if(!isLogged(req)) {
+    return res.render("main", {css: ["main.css"]});
   }
 
-  return res.render("main", {css: ["main.css"]});
+  const user = await User.findOne({
+    where: {
+      email: req.session.user.email,
+    }
+  });
+
+  const lembretesFromDB = await Lembrete.findAll({
+    where: {
+      email_usuario: req.session.user.email
+    }
+  });
+
+  const lembretes = lembretesFromDB.map(lembreteFromDB => {
+    return {...lembreteFromDB}
+  })
+  
+  return res.render("home", {
+    css: ["home.css"], 
+    user: {
+      username: user.username
+    },
+    lembretes
+  });
 });
 
 app.get('/register', function (req, res) {
@@ -106,12 +129,12 @@ app.get('/profile', authMiddleware, function (req, res) {
   res.render("profile");
 });
 
-app.get('/note/new', authMiddleware, function (req, res) {
-  res.render("note");
+app.get('/reminders/new', authMiddleware, function (req, res) {
+  res.render("reminder");
 });
 
-app.get('/note/:id', authMiddleware, function (req, res) {
-  res.render("note");
+app.get('/reminders/:id', authMiddleware, function (req, res) {
+  res.render("reminder");
 });
 
 app.use(async function(err, req, res, next) {
