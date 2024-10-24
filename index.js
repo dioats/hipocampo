@@ -129,6 +129,11 @@ app.get('/profile', authMiddleware, function (req, res) {
   res.render("profile");
 });
 
+app.get("/logout", (req, res) => {
+  req.session.destroy();
+  return res.redirect("/")
+})
+
 app.get('/reminders/new', authMiddleware, function (req, res) {
   res.render("reminder");
 });
