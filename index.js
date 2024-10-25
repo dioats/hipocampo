@@ -125,8 +125,41 @@ app.post('/login', async function (req, res) {
   res.redirect("/");
 });
 
-app.get('/profile', authMiddleware, function (req, res) {
-  res.render("profile");
+app.get('/profile', authMiddleware, async function (req, res) {
+
+  console.log(req.query)
+
+  const user = await User.findOne({
+    where: {
+      email: req.session.user.email,
+    }
+  });
+
+  res.render("profile", {
+    css: ["profile.css"], 
+    edited: req.query && req.query.edited,
+    user: {
+      username: user.username,
+      email: user.email,
+      phoneNumber: user.phoneNumber
+    }
+  });
+});
+
+app.post('/profile', authMiddleware, async function (req, res) {
+
+  const user = await User.findOne({
+    where: {
+      email: req.session.user.email,
+    }
+  });
+
+  user.username = req.body["username"];
+  user.phoneNumber = req.body["phoneNumber"];
+
+  user.save();
+
+  return res.redirect("/profile?edited=true")
 });
 
 app.get("/logout", (req, res) => {

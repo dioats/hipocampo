@@ -1,1 +1,25 @@
-<h1>Profile</h1>
+<div id="go-back">
+  <a href="/">
+    <img src="/assets/arrow-back-icon.png" alt="arrow back icon" class="arrow-back-icon">
+  </a>
+</div>
+
+<h1>Perfil de usuário</h1>
+
+<form action="/profile" method="post">
+  <div class="field">
+    <label for="username">USERNAME: </label>
+    <input type="username" name="username" id="username" class="input" value="{{user.username}}" required>
+  </div>
+  <div class="field">
+    <label for="phoneNumber">TELEFONE: </label>
+    <input type="text" name="phoneNumber" id="phoneNumber" class="input" value="{{user.phoneNumber}}" required>
+  </div>
+
+  {{#if edited}}
+    <div class="success-banner">
+      Alterado com sucesso!
+    </div>
+  {{/if}} 
+  <input type="submit" value="REGISTRAR-SE" class="button">
+</form>

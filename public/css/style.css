@@ -49,6 +49,13 @@ body {
   border-radius: 8px;
 }
 
+.success-banner {
+  background-color: #93bf85;
+  color: white;
+  padding: 16px;
+  border-radius: 8px;
+}
+
 .no-link {
   text-decoration: none;
   color: inherit;
