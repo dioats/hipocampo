@@ -168,7 +168,7 @@ app.get("/logout", (req, res) => {
 })
 
 app.get('/reminders/new', authMiddleware, function (req, res) {
-  res.render("reminder");
+  res.render("reminder", {css: ["reminder.css"]});
 });
 
 app.get('/reminders/:id', authMiddleware, function (req, res) {

@@ -1,1 +1,60 @@
-<h1>Reminder</h1>
+<div id="go-back">
+  <a href="/">
+    <img src="/assets/arrow-back-icon.png" alt="arrow back icon" class="arrow-back-icon">
+  </a>
+</div>
+
+<form action="/reminders/new" method="post">
+  <input 
+    type="text" 
+    name="title" 
+    id="title" 
+    class="mordern-input" 
+    placeholder="Título"
+    required>
+
+  <input 
+    type="text" 
+    name="description" 
+    id="description" 
+    class="mordern-input" 
+    placeholder="Descrição"
+    required>
+
+  <div id="dates">
+    <div class="field">
+      <label for="eventDate">Data do evento: </label>
+      <input type="date" name="eventDate" id="eventDate" class="input" required>
+    </div>
+
+    <div class="field">
+      <label for="reminderDate">Data do lembrete: </label>
+      <input type="date" name="reminderDate" id="reminderDate" class="input" required>
+    </div>
+  </div>
+
+  <div id="reminders">
+    <div>Meios de notificação:</div>
+    <div class="reminder-type">
+      <label for="notifyEmail">
+        <img src="/assets/email-icon.png" alt="email icon" class="icon">
+        Email
+      </label>
+      <input type="checkbox" id="notifyEmail" name="notifyEmail" checked />
+    </div>
+    <div class="reminder-type">
+      <label for="notifyWpp">
+        <img src="/assets/wpp-icon.png" alt="wpp icon" class="icon">
+        WhatsApp
+      </label>
+      <input type="checkbox" id="notifyWpp" name="notifyWpp" />
+    </div>
+    <div class="reminder-type">
+      <img src="/assets/sms-icon.png" alt="sms icon" class="icon">
+      <label for="notifySms">SMS</label>
+      <input type="checkbox" id="notifySms" name="notifySms" />
+    </div>
+  </div>
+
+  <input type="submit" value="SALVAR" class="button">
+</form>

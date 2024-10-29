@@ -1,0 +1,57 @@
+div#go-back {
+  padding: 20px;
+}
+
+form {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+form #title {
+  border: none;
+  outline: none;
+  font-size: xx-large;
+  padding: 20px;
+}
+
+form #description {
+  border: none;
+  outline: none;
+  font-size: medium;
+  padding: 20px;
+}
+
+form #dates {
+  margin-top: 10px;
+  display: flex;
+  padding: 20px;
+  justify-content: space-between;
+}
+
+form .field {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form #reminders {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+form .reminder-type {
+  border: 1px solid red;
+  display: flex;
+  align-items: center;
+  width: 70%;
+  padding: 8px;
+}
+
+form input[type=submit] {
+  margin: 20px;
+  margin-top: 40px;
+}

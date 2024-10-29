@@ -3,7 +3,7 @@ body {
   margin: 0;
 }
 
-.arrow-back-icon, .user-icon, .logout-icon, .plus-icon {
+.arrow-back-icon, .user-icon, .logout-icon, .plus-icon, .icon {
   width: 30px;
   height: 30px;
 }
@@ -17,6 +17,14 @@ body {
 .space {
   display: block;
   height: 10px;
+}
+
+.modern-input {
+  padding: 16px;
+  background-color: #D9D9D9;
+  border: none;
+  border-radius: 8px;
+  margin-top: 8px;
 }
 
 .input {
