@@ -4,13 +4,17 @@
   </a>
 </div>
 
-<form action="/reminders/new" method="post">
+<form action="/reminders" method="post">
+
+  <input type="text" hidden name="id" value="{{values.id}}">
+
   <input 
     type="text" 
     name="title" 
     id="title" 
     class="mordern-input" 
     placeholder="Título"
+    value="{{values.nome}}"
     required>
 
   <input 
@@ -19,17 +23,30 @@
     id="description" 
     class="mordern-input" 
     placeholder="Descrição"
+    value="{{values.descricao}}"
     required>
 
   <div id="dates">
     <div class="field">
       <label for="eventDate">Data do evento: </label>
-      <input type="date" name="eventDate" id="eventDate" class="input" required>
+      <input 
+        type="date" 
+        name="eventDate" 
+        id="eventDate" 
+        class="input" 
+        value="{{values.data_evento}}"
+        required>
     </div>
 
     <div class="field">
       <label for="reminderDate">Data do lembrete: </label>
-      <input type="date" name="reminderDate" id="reminderDate" class="input" required>
+      <input 
+        type="date" 
+        name="reminderDate" 
+        id="reminderDate" 
+        class="input" 
+        value="{{values.data_notificacao}}"
+        required>
     </div>
   </div>
 
