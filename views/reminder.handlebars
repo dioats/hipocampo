@@ -1,7 +1,11 @@
 <div id="go-back">
   <a href="/">
-    <img src="/assets/arrow-back-icon.png" alt="arrow back icon" class="arrow-back-icon">
+    <img src="/assets/arrow-back-icon.png" alt="arrow back icon" class="icon">
   </a>
+
+  {{#if values.id}}
+    <img src="/assets/trash-icon.png" alt="trash icon" class="icon" onclick="deleteReminder({{values.id}})">
+  {{/if}}
 </div>
 
 <form action="/reminders" method="post">
@@ -75,3 +79,12 @@
 
   <input type="submit" value="SALVAR" class="button">
 </form>
+
+<script>
+  function deleteReminder(id) {
+    fetch(`/reminders/${id}`, {method: "DELETE"})
+      .finally(() => {
+        window.location.href = "/"
+      })
+  }
+</script>

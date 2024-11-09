@@ -213,6 +213,18 @@ app.post('/reminders', authMiddleware, async function (req, res) {
   res.redirect("/");
 });
 
+app.delete("/reminders/:id", authMiddleware, async function (req, res) {
+
+  await Lembrete.destroy({
+    where: {
+      email_usuario: req.session.user.email,
+      id: req.params.id
+    }
+  })
+
+  res.redirect("/");
+});
+
 app.get('/reminders/:id', authMiddleware, async function (req, res) {
 
   const lembrete = await Lembrete.findOne({

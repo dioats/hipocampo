@@ -3,7 +3,7 @@ body {
   margin: 0;
 }
 
-.arrow-back-icon, .user-icon, .logout-icon, .plus-icon, .icon {
+.icon {
   width: 30px;
   height: 30px;
 }
