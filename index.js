@@ -241,6 +241,47 @@ app.use(async function(err, req, res, next) {
   res.render("error");
 });
 
+async function notifyRemindersRoutine() {
+
+  console.log("\n# Executando rotina de notificações");
+
+  try {
+
+    const lembretes = await Lembrete.findAll({
+      where: {
+        data_notificacao: new Date(),
+        notificado: false
+      }
+    });
+
+    console.log(`  foram retornados ${lembretes.length} lembretes para notificar`);
+
+    for (const lembrete of lembretes) {
+      try {
+
+        console.log(`  notificando lembrete: ${lembrete.id} usuario: ${lembrete.email_usuario}`)
+
+        lembrete.notificado = true;
+        await lembrete.save();
+
+      } catch(e) {
+        console.log(`  erro ao notificar o lembrete: ${lembrete.id} usuario: ${lembrete.email_usuario}`, e);
+      }
+    }
+
+  } catch(e) {
+    console.log("  Erro na rotina de notificação de lembretes", e);
+  }
+
+  console.log("# Rotina de notificações finalizada\n")
+
+  setTimeout(() => {
+    notifyRemindersRoutine();
+  }, 1000 * 20) //20 segundos
+}
+
+notifyRemindersRoutine();
+
 const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || "localhost";
 app.listen(PORT, HOST, () => {

@@ -25,7 +25,7 @@
 
   <div id="reminders">
     {{#each lembretes}}
-      <a href="/reminders/{{this.id}}" class="reminder no-link">
+      <a href="/reminders/{{this.id}}" class="reminder no-link {{#if this.notificado}} notificado {{/if}}">
         <div class="reminder-title">
           {{this.nome}}
         </div>

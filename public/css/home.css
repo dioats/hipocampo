@@ -33,6 +33,10 @@
   margin-top: 20px;
 }
 
+#reminders .reminder.notificado {
+  background-color: #61B8CC;
+}
+
 #reminders .reminder-title {
   font-weight: bold;
 }
