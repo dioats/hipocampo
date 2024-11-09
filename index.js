@@ -171,6 +171,25 @@ app.get('/reminders/new', authMiddleware, function (req, res) {
   res.render("reminder", {css: ["reminder.css"]});
 });
 
+app.post('/reminders/new', authMiddleware, async function (req, res) {
+
+  try {
+    await Lembrete.create({
+      email_usuario: req.session.user.email,
+      nome: req.body.title,
+      descricao: req.body.description,
+      notificado: false,
+      data_notificacao: req.body.reminderDate,
+      data_evento: req.body.eventDate
+    });
+  } catch(e) {
+    console.log(`erro ao cadastrar lembrete para usuario: ${req.body['email']}`, JSON.stringify(error))
+    next(e);
+  }
+
+  res.redirect("/");
+});
+
 app.get('/reminders/:id', authMiddleware, function (req, res) {
   res.render("reminder");
 });

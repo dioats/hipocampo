@@ -23,11 +23,11 @@ const Lembrete = sequelize.define('Lembrete', {
     defaultValue: false
   },
   data_notificacao: {
-    type: DataTypes.DATE,
+    type: DataTypes.DATEONLY,
     allowNull: false
   },
   data_evento: {
-    type: DataTypes.DATE,
+    type: DataTypes.DATEONLY,
     allowNull: false
   }
 }, {
