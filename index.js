@@ -6,6 +6,15 @@ const app = express();
 const session = require('express-session');
 const User = require("./models/User.js");
 const Lembrete = require("./models/Lembrete.js");
+const nodemailer = require('nodemailer');
+
+let transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_SENDER,
+    pass: process.env.EMAIL_SENDER_PASSWORD,
+  },
+});
 
 app.use(express.static("public"));
 app.engine("handlebars", handlebars.engine());
@@ -260,6 +269,27 @@ async function notifyRemindersRoutine() {
       try {
 
         console.log(`  notificando lembrete: ${lembrete.id} usuario: ${lembrete.email_usuario}`)
+
+        let mailOptions = {
+          from: process.env.EMAIL_SENDER,
+          to: lembrete.dataValues.email_usuario,
+          subject: `Hipocampo: ${lembrete.dataValues.nome}`,
+          html: `
+            <div>
+              <p>Passando aqui para lembrar...</p>
+              <p>descrição: ${lembrete.dataValues.descricao}</p>
+              <p>data: ${lembrete.dataValues.data_evento}</p>
+            </div>
+          `,
+        };
+        
+        transporter.sendMail(mailOptions, function(error, info) {
+          if (error) {
+            console.log('Erro ao enviar e-mail: ', error);
+          } else {
+            console.log('E-mail enviado: ' + info.response);
+          }
+        });
 
         lembrete.notificado = true;
         await lembrete.save();
